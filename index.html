@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joyeux Anniversaire 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4AF6A;
+    --rose: #E8A0B0;
+    --deep: #1a0a2e;
+    --soft: #f9f0f5;
+    --accent: #C97D8B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--soft);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Starfield */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(0.8); }
+    to { opacity: 0.9; transform: scale(1.2); }
+  }
+
+  /* Petals */
+  .petal {
+    position: fixed;
+    font-size: 1.2rem;
+    animation: fall linear infinite;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeUp 1.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .crown {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+    animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--rose) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 1.15rem;
+    color: var(--rose);
+    font-style: italic;
+    letter-spacing: 2px;
+    opacity: 0.9;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0;
+    opacity: 0.5;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider span { color: var(--gold); font-size: 1.1rem; }
+
+  /* Card */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,106,0.2);
+    border-radius: 20px;
+    padding: 44px 48px;
+    backdrop-filter: blur(12px);
+    position: relative;
+    animation: fadeUp 1.4s ease both;
+    animation-delay: 0.3s;
+    box-shadow: 0 0 60px rgba(212,175,106,0.06), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: var(--gold);
+    opacity: 0.12;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .intro {
+    font-size: 1rem;
+    color: var(--rose);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .greeting {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  p {
+    font-size: 1.12rem;
+    line-height: 1.9;
+    color: rgba(249,240,245,0.9);
+    margin-bottom: 22px;
+    font-weight: 300;
+  }
+
+  .verse {
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin: 24px 0;
+    background: rgba(212,175,106,0.05);
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .verse .ref {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    opacity: 0.7;
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+
+  .closing {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--rose);
+    text-align: center;
+    margin-top: 32px;
+    font-style: italic;
+  }
+
+  /* Footer glow */
+  .glow-bar {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+    margin: 40px auto 0;
+    border-radius: 4px;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; width: 80px; }
+    50% { opacity: 1; width: 140px; }
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 28px 22px; }
+    .title { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas class="stars" id="stars"></canvas>
+
+<!-- Falling petals -->
+<div id="petals"></div>
+
+<div class="container">
+  <div class="hero">
+    <span class="crown">👑</span>
+    <h1 class="title">Joyeux<br>Anniversaire</h1>
+    <p class="subtitle">27 Février ✦ Un jour béni</p>
+  </div>
+
+  <div class="divider"><span>🌸</span></div>
+
+  <div class="card">
+    <p class="intro">Voici un joli message que tu peux lui envoyer 💖</p>
+    <h2 class="greeting">Joyeux anniversaire ma best friend adorée 🎉💐</h2>
+
+    <p>En ce merveilleux 27 février, je rends grâce à Dieu pour ta vie. Que cette date se répète encore et encore dans ta vie, remplie de santé, de paix, de joie et d'accomplissements. Que chaque 27 février te trouve plus forte, plus épanouie et encore plus bénie que le précédent.</p>
+
+    <p>Je prie que le Seigneur t'accompagne dans cette nouvelle année et dans cette nouvelle étape de ta vie. Qu'Il ouvre devant toi des portes que personne ne pourra fermer.</p>
+
+    <div class="verse">
+      « Car je connais les projets que j'ai formés sur vous, dit l'Éternel, projets de paix et non de malheur, afin de vous donner un avenir et de l'espérance. »
+      <span class="ref">— Jérémie 29:11</span>
+    </div>
+
+    <p>Que tu obtiennes ton Master avec une excellente mention, que tu trouves un bon travail épanouissant, et que la prospérité t'accompagne. Que l'argent ne soit jamais un souci pour toi, mais une bénédiction abondante entre tes mains.</p>
+
+    <div class="verse">
+      « L'Éternel fera de toi la tête et non la queue ; tu seras toujours en haut et jamais en bas. »
+      <span class="ref">— Deutéronome 28:13</span>
+    </div>
+
+    <p>Mon amie capable, intelligente et courageuse, je crois en toi de tout mon cœur. Que Dieu te donne la sagesse et la force pour réussir dans tout ce que tu entreprendras.</p>
+
+    <div class="verse">
+      « Je puis tout par celui qui me fortifie. »
+      <span class="ref">— Philippiens 4:13</span>
+    </div>
+
+    <p>Je t'aime énormément. Merci d'être cette amie précieuse, loyale et lumineuse dans ma vie. Que cette nouvelle année soit remplie de grandes victoires, de bonheur sincère et d'amour véritable.</p>
+
+    <p class="closing">Encore joyeux anniversaire ma best friend 🥰🎂✨<br>Que Dieu te bénisse abondamment aujourd'hui et toujours.</p>
+  </div>
+
+  <div class="glow-bar"></div>
+</div>
+
+<script>
+  // Stars
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  for (let i = 0; i < 160; i++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const r = Math.random() * 1.5;
+    const opacity = Math.random() * 0.7 + 0.1;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+    ctx.fill();
+  }
+
+  // Petals
+  const petalContainer = document.getElementById('petals');
+  const emojis = ['🌸','🌺','✨','💖','🌷','⭐','💫','🌼'];
+  for (let i = 0; i < 22; i++) {
+    const el = document.createElement('div');
+    el.className = 'petal';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (8 + Math.random() * 10) + 's';
+    el.style.animationDelay = (Math.random() * 12) + 's';
+    el.style.fontSize = (0.9 + Math.random() * 0.8) + 'rem';
+    petalContainer.appendChild(el);
+  }
+</script>
+</body>
+</html>
